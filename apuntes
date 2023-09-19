@@ -1,0 +1,40 @@
+para iniciar:
+    npm create vite (para iniciar vite junto con config básica del proyecto)
+    npm install (para instalar dependencias del proyecto)
+    npm run dev (para levantar la aplicación)
+    recuerda, la función anónima contenida en un .map no usa llaves sino paréntesis
+      {tasks.map((task) => (
+        <div key={task.id}>
+            <h1>{task.title}</h1>
+            <p>{task.description}</p>
+        </div>
+      ))}
+
+      props.children son las etiquetas jsx (en realidad funciones) que están dentro del elemento padre
+
+
+      esto 
+      return (
+        <TaskContext.Provider value={{
+            tasks: tasks,
+            deleteTask: deleteTask,
+            createTask: createTask
+          }}
+        >{props.children}
+        </TaskContext.Provider>
+      );
+      y esto son lo mismo:
+      return (
+        <TaskContext.Provider value={{
+            tasks,
+            deleteTask,
+            createTask
+          }}
+        >{props.children}
+        </TaskContext.Provider>
+      );
+
+para estilos con tailwind
+        ir a la página oficial en installation y si usas react o algún frame work ir a Framework Guides y seguir instrucciones (hay comandos)
+        
+        Hay un plugin de VScode para Tailwind que es Tailwind CSS IntelliSense
