@@ -25,7 +25,6 @@ function TaskCard({ task }) {
     transform: CSS.Transform.toString(transform),
     transition,
     zIndex: isDragging ? 2 : 1, // Aumenta el z-index cuando se está arrastrando
-
   }
 
   const { deleteTask, copyTask, editTask, inputRef} = useContext(TaskContext);
@@ -37,7 +36,7 @@ function TaskCard({ task }) {
       {...attributes}
       className="bg-gray-800 text-white p-4 rounded-md"
     >
-      <div {...listeners} className="" >
+      <div {...listeners} className="hover:cursor-move" >
         <h1 className="text-xl font-bold capitalize">{task.title}</h1>
         <p className="text-gray-500 text-sm">{task.description}</p>
       </div>
