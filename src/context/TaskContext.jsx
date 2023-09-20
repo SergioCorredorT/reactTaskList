@@ -1,5 +1,5 @@
 import { createContext, useEffect, useRef, useState } from "react";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 
 //Aquí se crea
 export const TaskContext = createContext();
@@ -8,7 +8,7 @@ export const TaskContext = createContext();
 export function TaskContextProvider(props) {
   // Inicializa el estado de las tareas con cualquier tarea guardada en localStorage
   const [tasks, setTasks] = useState(() => {
-    const savedTasks = localStorage.getItem('tasks');
+    const savedTasks = localStorage.getItem("tasks");
     if (savedTasks) {
       return JSON.parse(savedTasks);
     } else {
@@ -21,15 +21,26 @@ export function TaskContextProvider(props) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
 
+  const [counter, setCounter] = useState(() => {
+    const savedCounter = localStorage.getItem("counter");
+    if (savedCounter) {
+      return parseInt(savedCounter);
+    } else {
+      return [];
+    }
+  });
+
   function createTask(task) {
     setTasks([
       ...tasks,
       {
-        id: tasks.length+1,
+        id: counter,
         title: task.title,
         description: task.description,
       },
     ]);
+    setCounter(counter + 1);
+    localStorage.setItem("counter", counter);
   }
 
   function deleteTask(taskId) {
@@ -41,8 +52,7 @@ export function TaskContextProvider(props) {
     setDescription(task.description);
   }
 
-  function editTask(taskId)
-  {
+  function editTask(taskId) {
     if (title && description) {
       //setTasks envía como parámetro siempre el task actual, que en este caso se recoge como prevTasks
       setTasks((prevTasks) =>
@@ -55,7 +65,7 @@ export function TaskContextProvider(props) {
 
   useEffect(() => {
     // Guarda las tareas en el localStorage cada vez que cambien
-    localStorage.setItem('tasks', JSON.stringify(tasks));
+    localStorage.setItem("tasks", JSON.stringify(tasks));
   }, [tasks]);
 
   return (
@@ -71,7 +81,7 @@ export function TaskContextProvider(props) {
         deleteTask,
         createTask,
         copyTask,
-        editTask
+        editTask,
       }}
     >
       {props.children}

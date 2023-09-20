@@ -17,7 +17,7 @@ function TaskCard({ task }) {
     transform,
     transition,
     isDragging
-  }= useSortable({
+  } = useSortable({
       id: task.id
     })
 
