@@ -1,7 +1,7 @@
 <h1>MyTaskList</h1>
 
 <h2>Descripción</h2>
-Mi primer proyecto React con drag and drop (probé el drag and drop con HTML5 pero me gustó más dejarlo con la API dnd-kit) siguiendo un tutorial de YouTube para después seguir añadiendo algunas cosas por mí mismo como botones CRUD en cada task card, y hacer uso de localstorage para guardado de task cards e ids de cada una.
+Mi primer proyecto React con drag and drop (probé el drag and drop con HTML5 pero me gustó más dejarlo con la API dnd-kit) siguiendo un tutorial de YouTube para después seguir añadiendo algunas cosas por iniciativa propia como botones CRUD en cada task card, hacer uso de localstorage para guardado de task cards e ids de cada una y usar inputRef para foco.
 Mi objetivo principal es aprender y ganar habilidad con React.
 Su funcionamiento consiste en añadir, quitar o modificar notas de texto de forma sencilla y elegante.
 Hice uso de <img src="https://skillicons.dev/icons?i=react,js,html,css,tailwind,vscode,github" /> jsx y vite
