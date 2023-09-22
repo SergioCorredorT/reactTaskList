@@ -1,6 +1,5 @@
 import { createContext, useEffect, useRef, useState } from "react";
 import PropTypes from "prop-types";
-import { Toaster, toast } from "sonner";
 
 //Aquí se crea
 export const TaskContext = createContext();
