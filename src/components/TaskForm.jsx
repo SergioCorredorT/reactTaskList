@@ -4,7 +4,7 @@ import { ThemeButton } from "./ThemeButton";
 
 export function TaskForm() {
 
-  const { createTask, inputRef, title, setTitle, description, setDescription } = useContext(TaskContext);
+  const { createTask, inputRef, title, setTitle, description, setDescription, commonStylesButton } = useContext(TaskContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -20,10 +20,11 @@ export function TaskForm() {
   return (
     <div className="dark:bg-slate-800 bg-slate-400 
                       max-w-md mx-auto p-10 mb-4">
-      <ThemeButton className="dark:bg-indigo-500 dark:hover:bg-indigo-400 dark:text-white 
-                            bg-indigo-300 hover:bg-indigo-200 text-black 
-                              px-3 py-1 mx-2
-                              absolute top-2 right-2 m-2" />
+      <ThemeButton className={`${commonStylesButton} 
+                            dark:bg-indigo-500 dark:hover:bg-indigo-400
+                            bg-indigo-300 hover:bg-indigo-200
+                              px-3 py-1 m-2
+                              absolute top-2 right-2`} />
       <form onSubmit={handleSubmit} className="m-2">
         <h1 className="text-2xl font-bold dark:text-white text-black mb-3">Crea tarea</h1>
         <input
@@ -46,9 +47,10 @@ export function TaskForm() {
           value={description}
           required
         ></textarea>
-        <button className="dark:bg-indigo-500 dark:hover:bg-indigo-400 dark:text-white 
+        <button className={`${commonStylesButton}
+                            dark:bg-indigo-500 dark:hover:bg-indigo-400 dark:text-white 
                             bg-indigo-300 hover:bg-indigo-200 text-black 
-                            mx-2 px-3 py-1">Guardar</button>
+                            mx-2 px-3 py-1`}>Guardar</button>
       </form>
     </div>
   );

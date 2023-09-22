@@ -27,7 +27,7 @@ function TaskCard({ task }) {
     zIndex: isDragging ? 2 : 1, // Aumenta el z-index cuando se está arrastrando
   }
 
-  const { deleteTask, copyTask, editTask, inputRef} = useContext(TaskContext);
+  const { deleteTask, copyTask, editTask, inputRef, commonStylesButton} = useContext(TaskContext);
 
   return (
     <div 
@@ -36,7 +36,7 @@ function TaskCard({ task }) {
       {...attributes}
       className="dark:bg-gray-800 dark:text-white
                    bg-gray-400 text-black
-                   p-4 rounded-md"
+                   p-4"
     >
       <div {...listeners} className="hover:cursor-move" >
         <h1 className="text-xl font-bold capitalize">{task.title}</h1>
@@ -46,25 +46,28 @@ function TaskCard({ task }) {
       </div>
       <div className="grid gap-3 mt-4">
         <button
-          className=" dark:bg-red-500  dark:hover:bg-red-400 
+          className= {`${commonStylesButton} 
+                    dark:bg-red-500  dark:hover:bg-red-400 
                     bg-red-300  hover:bg-red-200 
-                      px-2 py-1 rounded-md"
+                      px-2 py-1`}
           onClick={() => {deleteTask(task.id); inputRef.current.focus()} }
         >
           Eliminar
         </button>
         <button
-          className="dark:bg-yellow-500  dark:hover:bg-yellow-400
+          className={`${commonStylesButton}  
+                    dark:bg-yellow-500  dark:hover:bg-yellow-400
                     bg-yellow-300  hover:bg-yellow-200
-                      px-2 py-1 rounded-md"
+                      px-2 py-1`}
           onClick={() => {editTask(task.id);inputRef.current.focus()} }
         >
           Editar
         </button>
         <button
-          className="dark:bg-blue-500  dark:hover:bg-blue-400
+          className={`${commonStylesButton}  
+                    dark:bg-blue-500  dark:hover:bg-blue-400
                     bg-blue-300  hover:bg-blue-200
-                      px-2 py-1 rounded-md"
+                      px-2 py-1 rounded-md`}
           onClick={() => {copyTask(task); inputRef.current.focus()} }
         >
           Copiar

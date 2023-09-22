@@ -68,6 +68,10 @@ export function TaskContextProvider(props) {
     localStorage.setItem("tasks", JSON.stringify(tasks));
   }, [tasks]);
 
+  const commonStylesButton=`dark:text-white dark:active:shadow-t-white dark:shadow-b-white
+                            text-black active:shadow-t-black shadow-b-black
+                            transform translate-y-[-1px] active:translate-y-1 rounded-md`
+
   return (
     <TaskContext.Provider
       value={{
@@ -82,6 +86,7 @@ export function TaskContextProvider(props) {
         createTask,
         copyTask,
         editTask,
+        commonStylesButton,
       }}
     >
       {props.children}

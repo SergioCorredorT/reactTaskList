@@ -6,7 +6,14 @@ export default {
   ],
   "darkMode": "class",
   theme: {
-    extend: {},
+    extend: {
+      boxShadow: {
+        't-white': '0 -1px 3px white',
+        'b-white': '0 1px 3px white',
+        't-black': '0 -1px 3px black',
+        'b-black': '0 1px 3px black'
+      }
+    },
   },
   plugins: [],
 }
