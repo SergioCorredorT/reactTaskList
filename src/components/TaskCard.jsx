@@ -3,6 +3,7 @@ import { TaskContext } from "../context/TaskContext";
 import PropTypes from 'prop-types';
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
+import { Toaster, toast } from "sonner";
 
 function TaskCard({ task }) {
 
@@ -27,7 +28,25 @@ function TaskCard({ task }) {
     zIndex: isDragging ? 2 : 1, // Aumenta el z-index cuando se está arrastrando
   }
 
-  const { deleteTask, copyTask, editTask, inputRef, commonStylesButton} = useContext(TaskContext);
+  const { deleteTask, copyTask, editTask, inputTitleRef, inputDescriptionRef, commonStylesButton, title, description} = useContext(TaskContext);
+
+  function handleClickEdit() {
+    if(!title)
+    {
+      toast.error("Rellene título para poder guardar")
+      inputTitleRef.current.focus()
+    }
+    else if(!description)
+    {
+      toast.error("Rellene descripción para poder guardar")
+      inputDescriptionRef.current.focus();
+    }
+    else
+    {
+      editTask(task.id);
+      inputTitleRef.current.focus()
+    }
+  }
 
   return (
     <div 
@@ -50,7 +69,7 @@ function TaskCard({ task }) {
                     dark:bg-red-500  dark:hover:bg-red-400 
                     bg-red-300  hover:bg-red-200 
                       px-2 py-1`}
-          onClick={() => {deleteTask(task.id); inputRef.current.focus()} }
+          onClick={() => {deleteTask(task.id); inputTitleRef.current.focus()} }
         >
           Eliminar
         </button>
@@ -59,7 +78,7 @@ function TaskCard({ task }) {
                     dark:bg-yellow-500  dark:hover:bg-yellow-400
                     bg-yellow-300  hover:bg-yellow-200
                       px-2 py-1`}
-          onClick={() => {editTask(task.id);inputRef.current.focus()} }
+          onClick={handleClickEdit}
         >
           Editar
         </button>
@@ -68,11 +87,12 @@ function TaskCard({ task }) {
                     dark:bg-blue-500  dark:hover:bg-blue-400
                     bg-blue-300  hover:bg-blue-200
                       px-2 py-1 rounded-md`}
-          onClick={() => {copyTask(task); inputRef.current.focus()} }
+          onClick={() => {copyTask(task); inputTitleRef.current.focus()} }
         >
           Copiar
         </button>
       </div>
+      <Toaster/>
     </div>
   );
 }

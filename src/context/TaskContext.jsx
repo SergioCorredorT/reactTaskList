@@ -1,5 +1,6 @@
 import { createContext, useEffect, useRef, useState } from "react";
 import PropTypes from "prop-types";
+import { Toaster, toast } from "sonner";
 
 //Aquí se crea
 export const TaskContext = createContext();
@@ -16,7 +17,8 @@ export function TaskContextProvider(props) {
     }
   });
 
-  const inputRef = useRef();
+  const inputTitleRef = useRef();
+  const inputDescriptionRef = useRef();
 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -24,7 +26,7 @@ export function TaskContextProvider(props) {
   const [counter, setCounter] = useState(() => {
     const savedCounter = localStorage.getItem("counter");
     if (savedCounter) {
-      return parseInt(savedCounter);
+      return parseInt(savedCounter)+1;
     } else {
       return [];
     }
@@ -53,14 +55,12 @@ export function TaskContextProvider(props) {
   }
 
   function editTask(taskId) {
-    if (title && description) {
       //setTasks envía como parámetro siempre el task actual, que en este caso se recoge como prevTasks
       setTasks((prevTasks) =>
         prevTasks.map((task) =>
           task.id === taskId ? { ...task, title, description } : task
         )
       );
-    }
   }
 
   useEffect(() => {
@@ -77,7 +77,8 @@ export function TaskContextProvider(props) {
       value={{
         tasks,
         setTasks,
-        inputRef,
+        inputTitleRef,
+        inputDescriptionRef,
         title,
         setTitle,
         description,
