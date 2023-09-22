@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { TaskContext } from "../context/TaskContext";
 import { ThemeButton } from "./ThemeButton";
-import { toast } from "sonner";
+import { Toaster, toast } from "sonner";
 
 export function TaskForm() {
 
@@ -67,6 +67,7 @@ export function TaskForm() {
                             bg-indigo-300 hover:bg-indigo-200 text-black 
                             mx-2 px-3 py-1`}>Guardar</button>
       </form>
+      <Toaster/>
     </div>
   );
 }
