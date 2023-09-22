@@ -34,27 +34,37 @@ function TaskCard({ task }) {
       style={style}
       ref={setNodeRef}
       {...attributes}
-      className="bg-gray-800 text-white p-4 rounded-md"
+      className="dark:bg-gray-800 dark:text-white
+                   bg-gray-400 text-black
+                   p-4 rounded-md"
     >
       <div {...listeners} className="hover:cursor-move" >
         <h1 className="text-xl font-bold capitalize">{task.title}</h1>
-        <p className="text-gray-500 text-sm">{task.description}</p>
+        <p className="dark:text-gray-500 
+                      text-gray-300
+                      text-sm">{task.description}</p>
       </div>
       <div className="grid gap-3 mt-4">
         <button
-          className="bg-red-500 px-2 py-1 rounded-md hover:bg-red-400"
+          className=" dark:bg-red-500  dark:hover:bg-red-400 
+                    bg-red-300  hover:bg-red-200 
+                      px-2 py-1 rounded-md"
           onClick={() => {deleteTask(task.id); inputRef.current.focus()} }
         >
           Eliminar
         </button>
         <button
-          className="bg-yellow-500 px-2 py-1 rounded-md hover:bg-yellow-400"
+          className="dark:bg-yellow-500  dark:hover:bg-yellow-400
+                    bg-yellow-300  hover:bg-yellow-200
+                      px-2 py-1 rounded-md"
           onClick={() => {editTask(task.id);inputRef.current.focus()} }
         >
           Editar
         </button>
         <button
-          className="bg-blue-500 px-2 py-1 rounded-md hover:bg-blue-400"
+          className="dark:bg-blue-500  dark:hover:bg-blue-400
+                    bg-blue-300  hover:bg-blue-200
+                      px-2 py-1 rounded-md"
           onClick={() => {copyTask(task); inputRef.current.focus()} }
         >
           Copiar
