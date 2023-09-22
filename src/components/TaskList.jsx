@@ -9,7 +9,9 @@ function TaskList() {
   const {tasks,setTasks}=useContext(TaskContext);
 
   if (tasks.length === 0) {
-    return <h1 className="text-white text-4xl font-bold text-center">Sin tareas</h1>;
+    return <h1 className="dark:text-white
+                        text-black
+                          text-4xl font-bold text-center">Sin tareas</h1>;
   }
 
   const handleDragEnd= (e) =>{
