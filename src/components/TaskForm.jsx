@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { TaskContext } from "../context/TaskContext";
 import { ThemeButton } from "./ThemeButton";
 import { Toaster, toast } from "sonner";
@@ -34,30 +34,38 @@ export function TaskForm() {
     }
   }
 
-  const [chuck,setChuck]=useState(
-    () => {
-      const url = "https://api.chucknorris.io/jokes/random#";
-      fetch(url)
-        .then(response => response.json())
-        .then(data => {
-          fetch("https://libretranslate.de/translate", {
-            method: "POST",
-            body: JSON.stringify({
-              q: data.value,
-              source: "en",
-              target: "es",
-              format: "text"
-            }),
-            headers: { "Content-Type": "application/json" }
-          })
-          .then(response => response.json())
-          .then(data => {
-            setChuck(data.translatedText);
-          })
-          .catch(console.log);
-        })
-        .catch(console.log);
-    }, []);
+const getChuckNorrisJoke = async () => {
+  const url = "https://api.chucknorris.io/jokes/random#";
+  const response = await fetch(url);
+  const data = await response.json();
+  return data.value;
+};
+
+const translateToSpanish = async (text) => {
+  const response = await fetch("https://libretranslate.de/translate", {
+    method: "POST",
+    body: JSON.stringify({
+      q: text,
+      source: "en",
+      target: "es",
+      format: "text",
+    }),
+    headers: { "Content-Type": "application/json" },
+  });
+  const data = await response.json();
+  return data.translatedText;
+};
+
+const [chuck, setChuck] = useState(null);
+useEffect(() => {
+  const fetchAndTranslateJoke = async () => {
+    const joke = await getChuckNorrisJoke();
+    const translatedJoke = await translateToSpanish(joke);
+    setChuck(translatedJoke);
+  };
+
+  fetchAndTranslateJoke();
+}, []);
 
   return (
     <div
@@ -105,7 +113,10 @@ export function TaskForm() {
           >
             Guardar
           </button>
-          <span className="text-white flex-grow text-right wrap-words" style={{overflowWrap: "anywhere"}}>
+          <span
+            className="text-white flex-grow text-right wrap-words"
+            style={{ overflowWrap: "anywhere" }}
+          >
             {chuck}
           </span>
         </div>
