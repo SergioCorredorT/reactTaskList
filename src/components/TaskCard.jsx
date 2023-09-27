@@ -3,7 +3,7 @@ import { TaskContext } from "../context/TaskContext";
 import PropTypes from 'prop-types';
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
-import { Toaster, toast } from "sonner";
+import {toast } from "sonner";
 
 function TaskCard({ task }) {
 
@@ -55,9 +55,9 @@ function TaskCard({ task }) {
       {...attributes}
       className="dark:bg-gray-800 dark:text-white
                    bg-gray-400 text-black
-                   p-4"
+                   p-4 min-w-min box-border"
     >
-      <div {...listeners} className="hover:cursor-move" >
+      <div {...listeners} className="hover:cursor-move box-border" >
         <h1 className="text-xl font-bold capitalize">{task.title}</h1>
         <p className="dark:text-gray-500 
                       text-gray-300
@@ -92,7 +92,6 @@ function TaskCard({ task }) {
           Copiar
         </button>
       </div>
-      <Toaster/>
     </div>
   );
 }

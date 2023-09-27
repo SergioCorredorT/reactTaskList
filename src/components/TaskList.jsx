@@ -2,7 +2,7 @@ import TaskCard from "./TaskCard";
 import { useContext } from "react";
 import { TaskContext } from "../context/TaskContext";
 import { DndContext, closestCenter } from "@dnd-kit/core";
-import { SortableContext, horizontalListSortingStrategy, arrayMove } from "@dnd-kit/sortable";
+import { SortableContext, rectSortingStrategy, arrayMove } from "@dnd-kit/sortable";
 
 function TaskList() {
 
@@ -26,14 +26,14 @@ function TaskList() {
   };
 
   return (
-    <div className="grid grid-cols-4 gap-2">
+    <div className="grid gap-2 grid-columns-autofill">
       <DndContext 
         collisionDetection={closestCenter}
         onDragEnd={handleDragEnd}
       >
         <SortableContext
           items={tasks}
-          strategy={horizontalListSortingStrategy}
+          strategy={rectSortingStrategy}
         >
           {tasks.map((task) => (
             <TaskCard key={task.id} task={task}/>

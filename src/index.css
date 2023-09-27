@@ -5,3 +5,8 @@
 button{
     user-select: none;
 }
+
+.grid-columns-autofill
+{
+    grid-template-columns: repeat(auto-fill, minmax(166px, 1fr));
+}
