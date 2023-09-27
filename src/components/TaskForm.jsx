@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { TaskContext } from "../context/TaskContext";
 import { ThemeButton } from "./ThemeButton";
 import { Toaster, toast } from "sonner";
@@ -34,9 +34,8 @@ export function TaskForm() {
     }
   }
 
-  const [chuck,setChuck]=useState("");
-
-    useEffect(() => {
+  const [chuck,setChuck]=useState(
+    () => {
       const url = "https://api.chucknorris.io/jokes/random#";
       fetch(url)
         .then(response => response.json())
@@ -59,8 +58,6 @@ export function TaskForm() {
         })
         .catch(console.log);
     }, []);
-    
-
 
   return (
     <div
@@ -99,7 +96,7 @@ export function TaskForm() {
           ref={inputDescriptionRef}
           //required
         ></textarea>
-        <div className="w-full flex justify-between">
+        <div className="w-full flex justify-between flex-col sm:flex-row">
           <button
             className={`${commonStylesButton}
                               dark:bg-indigo-500 dark:hover:bg-indigo-400 dark:text-white 

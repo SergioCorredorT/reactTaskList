@@ -1,2 +1,1 @@
 login con firebase
-fetch de chistes de chuck
