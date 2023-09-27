@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { TaskContext } from "../context/TaskContext";
 import { ThemeButton } from "./ThemeButton";
 import { Toaster, toast } from "sonner";
@@ -33,6 +33,34 @@ export function TaskForm() {
       inputTitleRef.current.focus();
     }
   }
+
+  const [chuck,setChuck]=useState("");
+
+    useEffect(() => {
+      const url = "https://api.chucknorris.io/jokes/random#";
+      fetch(url)
+        .then(response => response.json())
+        .then(data => {
+          fetch("https://libretranslate.de/translate", {
+            method: "POST",
+            body: JSON.stringify({
+              q: data.value,
+              source: "en",
+              target: "es",
+              format: "text"
+            }),
+            headers: { "Content-Type": "application/json" }
+          })
+          .then(response => response.json())
+          .then(data => {
+            setChuck(data.translatedText);
+          })
+          .catch(console.log);
+        })
+        .catch(console.log);
+    }, []);
+    
+
 
   return (
     <div
@@ -71,14 +99,19 @@ export function TaskForm() {
           ref={inputDescriptionRef}
           //required
         ></textarea>
-        <button
-          className={`${commonStylesButton}
-                            dark:bg-indigo-500 dark:hover:bg-indigo-400 dark:text-white 
-                            bg-indigo-300 hover:bg-indigo-200 text-black 
-                            mx-2 px-3 py-1`}
-        >
-          Guardar
-        </button>
+        <div className="w-full flex justify-between">
+          <button
+            className={`${commonStylesButton}
+                              dark:bg-indigo-500 dark:hover:bg-indigo-400 dark:text-white 
+                              bg-indigo-300 hover:bg-indigo-200 text-black 
+                              mx-2 px-3 py-1 w-fit h-fit`}
+          >
+            Guardar
+          </button>
+          <span className="text-white flex-grow text-right wrap-words" style={{overflowWrap: "anywhere"}}>
+            {chuck}
+          </span>
+        </div>
       </form>
       <Toaster />
     </div>
