@@ -22,26 +22,15 @@ export function TaskContextProvider(props) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
 
-  const [counter, setCounter] = useState(() => {
-    const savedCounter = localStorage.getItem("counter");
-    if (savedCounter) {
-      return parseInt(savedCounter)+1;
-    } else {
-      return [];
-    }
-  });
-
   function createTask(task) {
     setTasks([
       ...tasks,
       {
-        id: counter,
+        id: crypto.randomUUID(),
         title: task.title,
         description: task.description,
       },
     ]);
-    setCounter(counter + 1);
-    localStorage.setItem("counter", counter);
   }
 
   function deleteTask(taskId) {

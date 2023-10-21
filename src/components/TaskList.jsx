@@ -14,16 +14,23 @@ function TaskList() {
                           text-4xl font-bold text-center">Sin tareas</h1>;
   }
 
-  const handleDragEnd= (e) =>{
-    const {active, over} = e;
-
-    setTasks((tasks)=> {
-      const oldIndex = tasks.findIndex(task => task.id==active.id);
-      const newIndex = tasks.findIndex(task=>task.id==over.id);
-
-      return arrayMove(tasks, oldIndex, newIndex);
-    })
+  const handleDragEnd = (e) => {
+    const { active, over } = e;
+  
+    if (over) {
+      setTasks((tasks) => {
+        const oldIndex = tasks.findIndex((task) => task.id == active.id);
+        const newIndex = tasks.findIndex((task) => task.id == over.id);
+  
+        return arrayMove(tasks, oldIndex, newIndex);
+      });
+    }
+    else
+    {
+      console.log("daría error");
+    }
   };
+  
 
   return (
     <div className="grid gap-2 grid-columns-autofill">
