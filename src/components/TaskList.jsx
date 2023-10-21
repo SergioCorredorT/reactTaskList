@@ -25,10 +25,6 @@ function TaskList() {
         return arrayMove(tasks, oldIndex, newIndex);
       });
     }
-    else
-    {
-      console.log("daría error");
-    }
   };
   
 
