@@ -26,7 +26,6 @@ function TaskList() {
       });
     }
   };
-  
 
   return (
     <div className="grid gap-2 grid-columns-autofill">

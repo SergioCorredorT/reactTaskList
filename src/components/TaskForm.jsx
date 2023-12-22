@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { TaskContext } from "../context/TaskContext";
 import { ThemeButton } from "./ThemeButton";
 import { Toaster, toast } from "sonner";
+import { useTranslatedChuckNorrisJoke } from "../hooks/useTranslatedChuckNorrisJoke";
 
 export function TaskForm() {
   const {
@@ -34,38 +35,12 @@ export function TaskForm() {
     }
   }
 
-const getChuckNorrisJoke = async () => {
-  const url = "https://api.chucknorris.io/jokes/random#";
-  const response = await fetch(url);
-  const data = await response.json();
-  return data.value;
-};
+  const [chuck, setChuck] = useState(null);
+  const { translatedJoke } = useTranslatedChuckNorrisJoke();
 
-const translateToSpanish = async (text) => {
-  const response = await fetch("https://libretranslate.de/translate", {
-    method: "POST",
-    body: JSON.stringify({
-      q: text,
-      source: "en",
-      target: "es",
-      format: "text",
-    }),
-    headers: { "Content-Type": "application/json" },
-  });
-  const data = await response.json();
-  return data.translatedText;
-};
-
-const [chuck, setChuck] = useState(null);
-useEffect(() => {
-  const fetchAndTranslateJoke = async () => {
-    const joke = await getChuckNorrisJoke();
-    const translatedJoke = await translateToSpanish(joke);
+  useEffect(() => {
     setChuck(translatedJoke);
-  };
-
-  fetchAndTranslateJoke();
-}, []);
+  }, [translatedJoke]);
 
   return (
     <div
