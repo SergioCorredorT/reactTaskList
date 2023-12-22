@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 
 const TRANSLATOR_URL = "https://libretranslate.de/translate";
 
-export function useTranslate(text, sourceLang, targetLang) {
+export function useTranslate({text, sourceLang, targetLang}) {
   const [translatedText, setTranslatedText] = useState(null);
 
   useEffect(() => {
@@ -21,9 +21,8 @@ export function useTranslate(text, sourceLang, targetLang) {
         setTranslatedText(data.translatedText);
     };
 
-    if (text)
-      translate();
+    if (text) translate();
   }, [text, sourceLang, targetLang]);
 
-  return translatedText;
+  return {"translatedText":  translatedText};
 }

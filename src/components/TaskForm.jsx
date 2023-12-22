@@ -36,7 +36,7 @@ export function TaskForm() {
   }
 
   const [chuck, setChuck] = useState(null);
-  const { translatedJoke } = useTranslatedChuckNorrisJoke();
+  const { "translatedText" : translatedJoke } = useTranslatedChuckNorrisJoke();
 
   useEffect(() => {
     setChuck(translatedJoke);
