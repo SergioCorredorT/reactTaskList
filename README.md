@@ -7,6 +7,7 @@ Su funcionamiento consiste en añadir, quitar o modificar notas de texto de form
 Hice uso de <img src="https://skillicons.dev/icons?i=react,js,html,css,tailwind,vscode,github" /> jsx y vite
 
 <h2>URL para ver el resultado</h2>
+
 [Click para ver el proyecto desplegado en GitHub pages](https://sergiocorredort.github.io/reactTaskList/)
 
 <h2>Tiempo de programación</h2>
